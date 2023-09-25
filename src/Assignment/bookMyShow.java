@@ -22,7 +22,7 @@ public class bookMyShow {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		
+
 		// Step 1: Open https://in.bookmyshow.com/explore/home/
 		driver.get("https://in.bookmyshow.com/explore/home/");
 
@@ -33,7 +33,7 @@ public class bookMyShow {
 		//cityDropdown.click();
 		Thread.sleep(2000);
 		dropDownvalue.click();
-		
+
 		// Step 3: Click on Sign In
 		WebElement signInButton = driver.findElement(By.xpath("//div[contains(text(),'Sign in')]"));
 		signInButton.click();
@@ -52,9 +52,9 @@ public class bookMyShow {
 		continueButton.click();
 		Thread.sleep(2000);
 		String bookMyShowAdd= driver.getWindowHandle();
-				 		
+
 		driver.switchTo().newWindow(WindowType.TAB);
-		
+
 		// Step 6: Go to Yopmail.com and access inbox
 		driver.get("http://www.yopmail.com/en/");
 		WebElement yopmailEmailField = driver.findElement(By.id("login"));
@@ -62,44 +62,33 @@ public class bookMyShow {
 		WebElement checkInboxButton = driver.findElement(By.xpath("//i[@class='material-icons-outlined f36']"));
 		checkInboxButton.click();
 		Thread.sleep(2000);
-		
+
 		driver.switchTo().frame(2);
 		WebElement copyOtpValue=driver.findElement(By.cssSelector("body > main:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)"));
 		System.out.println(copyOtpValue.getText());
 		String otpValue=copyOtpValue.getText();
-	     //copyOtpValue.sendKeys(Keys.CONTROL,"c");
-	     
-	   driver.switchTo().window(bookMyShowAdd);
-		//driver.navigate().to("https://in.bookmyshow.com/explore/home");
-		System.out.println("Main window");
-	     
-	// Step 7: Locate the latest email from BookMyShow and fetch the OTP
-		//WebElement latestEmail = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("body > main:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)")));
-		//latestEmail.click();
-		//String emailSubject =  copyOtpValue.getText();
-		//System.out.println();
-		//String otp = emailSubject.replaceAll("[^0-9]", "");
 
-		// Step 8: Come back to Sign in Page and enter the OTP
-		//driver.get("https://in.bookmyshow.com/explore/home/bengaluru");
-	     WebElement otpField = driver.findElement(By.xpath("//input[@class='bwc__sc-rwpctr-1 jLBVFy']"));
-		//otpField.click();
+		driver.switchTo().window(bookMyShowAdd);
+		System.out.println("Main window");
+
+
+		//Step 7: Come back to Sign in Page and enter the OTP
+
+		WebElement otpField = driver.findElement(By.xpath("//input[@class='bwc__sc-rwpctr-1 jLBVFy']"));
 		otpField.sendKeys(otpValue);
 		Thread.sleep(2000);
 		WebElement otpBtn = driver.findElement(By.xpath("//button[contains(text(),'Continue')]"));
 		otpBtn.click();
 		System.out.println("Button clicked");
-		
-		driver.switchTo().window(bookMyShowAdd);
-         
-		// Step 9: Validate user is successfully signed in and "Hi, Guest" is displayed.
-		/*WebElement greetingMessage = driver.findElement(By.xpath("//span[@class='bwc__sc-1nbn7v6-12 cQWvYS']"));
+
+		// Step 8: Validate user is successfully signed in and "Hi, Guest" is displayed.
+		WebElement greetingMessage = driver.findElement(By.xpath("//span[@class='bwc__sc-1nbn7v6-12 cQWvYS']"));
 		if (greetingMessage.isDisplayed()) {
 			System.out.println("User successfully signed in: " + greetingMessage.getText());
-		}*/
+		}
 
 		// Close the browser
-		//driver.quit();
+		driver.quit();
 	}
 }
 
